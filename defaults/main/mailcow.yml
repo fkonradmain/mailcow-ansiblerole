@@ -46,6 +46,9 @@ mailcow__config_additional_san: []
 # Comma separated list without spaces! Example: ADDITIONAL_SERVER_NAMES=a.b.c,d.e.f
 mailcow__config_additional_server_names: []
 
+# Use Let's Encrypt staging server - y/n
+mailcow__config_use_le_staging: n
+
 # Skip running ACME (acme-mailcow, Let's Encrypt certs) - y/n
 mailcow__config_skip_lets_encrypt: n
 

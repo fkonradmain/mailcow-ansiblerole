@@ -36,6 +36,8 @@
       value: "{{ mailcow__config_additional_san | join(',') }}"
     - variable: ADDITIONAL_SERVER_NAMES
       value: "{{ mailcow__config_additional_server_names | join(',') }}"
+    - variable: LE_STAGING
+      value: "{{ mailcow__config_use_le_staging }}"
     - variable: SKIP_LETS_ENCRYPT
       value: "{{ mailcow__config_skip_lets_encrypt }}"
     - variable: ENABLE_SSL_SNI
@@ -72,3 +74,11 @@
       value: "{{ mailcow__docker_compose_project_name }}"
     - variable: ACME_CONTACT
       value: "{{ mailcow__config_acme_contact }}"
+
+- name: "Configure Let's Encrypt Staging Line"
+  become: yes
+  when:  mailcow__config_use_le_staging == "y"
+  notify: Recreate mailcow
+  ansible.builtin.lineinfile:
+    path: "{{ mailcow__install_path }}/mailcow.conf"
+    line: LE_STAGING=y
